@@ -78,5 +78,4 @@ Feel free to explore the code, test the application, and provide your feedback.
 
 Thank you for considering my submission!
 
-[Your Name]
-[Your Contact Information]
+Amr Mohamed
