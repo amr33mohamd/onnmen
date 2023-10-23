@@ -41,7 +41,12 @@ class AppointmentRepository
 
     public function getAppointmentsByPatientId($id)
     {
-        return Appointment::where('patient_id',$id)->get();
+        return Appointment::where('patient_id',$id)->with('doctor')->get();
+    }
+
+    public function getAppointmentsByDoctorId($id)
+    {
+        return Appointment::where('doctor_id',$id)->with('patient')->get();
     }
 
 }

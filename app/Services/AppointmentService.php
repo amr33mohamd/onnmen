@@ -57,5 +57,11 @@ class AppointmentService
         return $this->appointmentRepository->getAppointmentsByPatientId($id);
     }
 
+    //get all appointments by doctor id
+    public function getAppointmentsByDoctorId($id)
+    {
+        return $this->appointmentRepository->getAppointmentsByDoctorId($id);
+    }
+
 }
     

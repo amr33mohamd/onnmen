@@ -3,8 +3,10 @@ import { Head } from "@inertiajs/react";
 import GuestLayout from "@/Layouts/GuestLayout";
 import * as React from "react";
 import CardMedia from "@mui/material/CardMedia";
-
 import Box from "@mui/material/Box";
+
+import { Link } from "@inertiajs/react";
+import Stack from "@mui/material/Stack";
 import { DataGrid } from "@mui/x-data-grid";
 import moment from "moment";
 
@@ -19,10 +21,10 @@ const columns = [
     },
     { field: "status", headerName: "status", width: 130 },
     {
-        field: "doctor",
-        headerName: "Doctor Name",
+        field: "patient",
+        headerName: "Patient Name",
         width: 130,
-        valueGetter: (params) => params.row?.doctor?.name,
+        valueGetter: (params) => params.row?.patient?.name,
     },
     {
         field: "reason",

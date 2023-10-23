@@ -33,8 +33,7 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return $request->user()->role == "patient" ? redirect(route('dashboard'))  : redirect(route('doctor.dashboard')); 
     }
 
     /**

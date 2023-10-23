@@ -16,42 +16,39 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { FormControl, Input, FormHelperText, InputLabel } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import { useState } from 'react'
-import { router } from '@inertiajs/react'
-import { useForm } from '@inertiajs/react'
+import { useState } from "react";
+import { router } from "@inertiajs/react";
+import { useForm } from "@inertiajs/react";
 
-
-const Index = ({ auth, doctor, appointments,errors }) => {
-   
+const Index = ({ auth, doctor, appointments, errors }) => {
     const [values, setValues] = useState({
         appointment_date: "",
         reason: "",
-        doctor_id: doctor.id
-      })
-    
-      function handleChange(e) {
+        doctor_id: doctor.id,
+    });
+
+    function handleChange(e) {
         //check if e.target exists
         if (!e.target) {
-          setValues(values => ({
-            ...values,
-            appointment_date: e,
-          }))
-          return
-        }
-        else{
+            setValues((values) => ({
+                ...values,
+                appointment_date: e,
+            }));
+            return;
+        } else {
             const key = e.target.id;
-            const value = e.target.value
-            setValues(values => ({
+            const value = e.target.value;
+            setValues((values) => ({
                 ...values,
                 [key]: value,
-            }))
+            }));
         }
-      }
+    }
 
     function handleSubmit(e) {
-        e.preventDefault()
-        router.post('/reserve', values)
-      }
+        e.preventDefault();
+        router.post("/reserve", values);
+    }
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -80,52 +77,60 @@ const Index = ({ auth, doctor, appointments,errors }) => {
                 >
                     {/* <h1>{appointments}</h1> */}
                     <form onSubmit={handleSubmit}>
-                    <FormControl sx={{ width: "100%", marginY: 1 }}>
-                        <InputLabel htmlFor="my-input">
-                            Reason of meeting
-                        </InputLabel>
-                        <Input
-                            id="reason"
-                            aria-describedby="my-helper-text"
-                            value={values.reason}
-                             onChange={handleChange}
-                        />
-                        <FormHelperText id="my-helper-text">
-                            please enter the reason of meeting
-                        </FormHelperText>
-                        <p style={{ color:"red" }}>{errors.reason && <div>{errors.reason}</div>}</p>
-
-                    </FormControl>
-
-                    <FormControl sx={{ width: "100%" }}>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DateTimePicker
-                                timeSteps={{ hours: 1, minutes: 60 }}
-                                shouldDisableTime={(time) => {
-                                    if (
-                                        time.toISOString() ==
-                                        "2023-10-22T10:00:00.000Z"
-                                    ) {
-                                        return true;
-                                    }
-                                    return false;
-                                }}
-                                label="Time"
-                                id="appointment_date"
-                                value={values.appointment_date}
-                                 onChange={handleChange}
+                        <FormControl sx={{ width: "100%", marginY: 1 }}>
+                            <InputLabel htmlFor="my-input">
+                                Reason of meeting
+                            </InputLabel>
+                            <Input
+                                id="reason"
+                                aria-describedby="my-helper-text"
+                                value={values.reason}
+                                onChange={handleChange}
                             />
                             <FormHelperText id="my-helper-text">
-                                gray times are reserved or not a working time of
-                                doctor
+                                please enter the reason of meeting
                             </FormHelperText>
-                            <p style={{ color:"red" }}>{errors.appointment_date && <div>{errors.appointment_date}</div>}</p>
+                            <p style={{ color: "red" }}>
+                                {errors.reason && <div>{errors.reason}</div>}
+                            </p>
+                        </FormControl>
 
-                        </LocalizationProvider>
-                    </FormControl>
-                    <Button type="submit" variant="contained" endIcon={<SendIcon />}>
-                        Book
-                    </Button>
+                        <FormControl sx={{ width: "100%" }}>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DateTimePicker
+                                    timeSteps={{ hours: 1, minutes: 60 }}
+                                    shouldDisableTime={(time) => {
+                                        if (
+                                            time.toISOString() ==
+                                            "2023-10-22T10:00:00.000Z"
+                                        ) {
+                                            return true;
+                                        }
+                                        return false;
+                                    }}
+                                    label="Time"
+                                    id="appointment_date"
+                                    value={values.appointment_date}
+                                    onChange={handleChange}
+                                />
+                                <FormHelperText id="my-helper-text">
+                                    gray times are reserved or not a working
+                                    time of doctor
+                                </FormHelperText>
+                                <p style={{ color: "red" }}>
+                                    {errors.appointment_date && (
+                                        <div>{errors.appointment_date}</div>
+                                    )}
+                                </p>
+                            </LocalizationProvider>
+                        </FormControl>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            endIcon={<SendIcon />}
+                        >
+                            Book
+                        </Button>
                     </form>
                 </Box>
             </Box>

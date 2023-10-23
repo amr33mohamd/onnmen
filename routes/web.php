@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\Patient\IndexController;
 use App\Http\Controllers\Patient\ReserveController;
 use App\Http\Controllers\Patient\AppointmentsController;
+use App\Http\Controllers\Doctor\AppointmentsController as DoctorAppointmentsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,10 +28,14 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', [IndexController::class, 'show'])->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('/reserve/{id}', [ReserveController::class, 'show'])->middleware(['auth', 'verified'])->name('reserve');
-Route::post('/reserve', [ReserveController::class, 'store'])->middleware(['auth', 'verified'])->name('store');
-Route::get('/appointments', [AppointmentsController::class, 'show'])->middleware(['auth', 'verified'])->name('appointments');
+Route::get('/dashboard', [IndexController::class, 'show'])->middleware(['auth', 'checkRole:patient'])->name('dashboard');
+Route::get('/reserve/{id}', [ReserveController::class, 'show'])->middleware(['auth', 'checkRole:patient'])->name('reserve');
+Route::post('/reserve', [ReserveController::class, 'store'])->middleware(['auth', 'checkRole:patient'])->name('store');
+Route::get('/appointments', [AppointmentsController::class, 'show'])->middleware(['auth', 'checkRole:patient'])->name('appointments');
+
+
+Route::get('/doctor/appointments',[DoctorAppointmentsController::class, 'show'])->middleware(['auth','checkRole:doctor'])->name('doctor.dashboard');
+
 
 Route::get('/test', function () {
     return Inertia::render('Test');
