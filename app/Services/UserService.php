@@ -28,7 +28,10 @@ class UserService
     {
         return $this->userRepository->getAllUsers();
     }
-
+    public function getAllDoctors()
+    {
+        return $this->userRepository->getAllDoctors();
+    }
     public function getUserById($id)
     {
          return $this->userRepository->getUserById($id);
@@ -38,6 +41,10 @@ class UserService
     {
         return $this->userRepository->deleteUser($id);
 
+    }
+    public function appointmentsDates($id)
+    {
+        return $this->userRepository->appointmentsDates($id);
     }
 
     public function createUser(array $userDetails)
@@ -51,4 +58,6 @@ class UserService
        return $this->userRepository->updateUser($id,$newDetails);
 
     }
+    
+
 }

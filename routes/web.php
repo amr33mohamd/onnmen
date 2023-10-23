@@ -4,7 +4,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use App\Http\Controllers\Patient\IndexController;
+use App\Http\Controllers\Patient\ReserveController;
+use App\Http\Controllers\Patient\AppointmentsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,10 +27,10 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [IndexController::class, 'show'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/reserve/{id}', [ReserveController::class, 'show'])->middleware(['auth', 'verified'])->name('reserve');
+Route::post('/reserve', [ReserveController::class, 'store'])->middleware(['auth', 'verified'])->name('store');
+Route::get('/appointments', [AppointmentsController::class, 'show'])->middleware(['auth', 'verified'])->name('appointments');
 
 Route::get('/test', function () {
     return Inertia::render('Test');

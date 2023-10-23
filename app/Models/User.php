@@ -42,4 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function appointments()
+    {
+        if($this->role == 'patient')
+            return $this->hasMany(Appointment::class,'patient_id','id');
+        else
+        return $this->hasMany(Appointment::class,'doctor_id','id');
+    }
 }

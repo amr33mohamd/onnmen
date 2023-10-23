@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const Test = () => {
     return (
-        <h1>This is test component</h1>
-    )
-}
+        <div>
+            <h1>Test</h1>
+        </div>
+    );
+};
 
-export default Test
+export default Test;

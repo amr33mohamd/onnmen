@@ -88,6 +88,7 @@ return [
     'current_page'          => 'Current page',
     'selected_rows'         => 'Selected rows',
     'upload'                => 'Upload',
+    'iso_date' => 'The :attribute must be a valid ISO8601 string.',
     'new_folder'            => 'New folder',
     'time'                  => 'Time',
     'size'                  => 'Size',

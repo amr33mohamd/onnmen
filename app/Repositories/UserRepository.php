@@ -24,7 +24,11 @@ class UserRepository
     {
         return $this->user->paginate();
     }
-
+    
+    public function getAllDoctors()
+    {
+        return $this->user->where("role","doctor")->paginate(12);
+    }
     public function getUserById($id)
     {
         return User::findOrFail($id);
@@ -37,6 +41,10 @@ class UserRepository
     public function createUser(array $userDetails)
     {
         return User::create($userDetails);
+    }
+    public function appointmentsDates($id)
+    {
+        return User::findOrFail($id)->appointments()->pluck('appointment_date');
     }
 
     public function updateUser($id, array $newDetails)

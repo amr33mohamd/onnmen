@@ -20,7 +20,6 @@ return new class extends Migration
             $table->dateTime('appointment_date');
             $table->string('status')->default('pending');
             $table->string('reason')->nullable();
-            $table->string('prescription')->nullable();
             $table->timestamps();
         });
     }
